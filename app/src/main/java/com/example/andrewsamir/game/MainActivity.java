@@ -2,7 +2,9 @@ package com.example.andrewsamir.game;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -14,11 +16,23 @@ public class MainActivity extends Activity {
     Button b1,b2,b3,b4,b5,b6,b7,b8,b9;
 
     boolean bo=false;
+    long myIntValue;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+
+            editor.putInt("your_int_key", 60000);
+
+            editor.commit();
+
+
+
 
         b1=(Button)findViewById(R.id.B1);
         b2=(Button)findViewById(R.id.B2);
@@ -164,6 +178,18 @@ public class MainActivity extends Activity {
                     nextbutton.setEnabled(true);
                     dialog.dismiss();
                 }
+                else {
+                    SharedPreferences sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
+
+                     myIntValue = sp.getInt("your_int_key", 60000);
+                    SharedPreferences.Editor editor = sp.edit();
+
+                    editor.putInt("your_int_key", sp.getInt("your_int_key", 60000)+60000);
+
+                    editor.commit();
+
+                    Timer();
+                }
 
 
             }
@@ -173,4 +199,30 @@ public class MainActivity extends Activity {
 
     }
 
+    public void Timer(){
+        final Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.timer);
+        final TextView text = (TextView) dialog.findViewById(R.id.textViewTimer);
+
+        new CountDownTimer( myIntValue,1000) {
+
+            public void onTick(long millisUntilFinished) {
+                text.setText(millisUntilFinished / 1000+"");
+                //here you can have your logic to set text to edittext
+            }
+
+            public void onFinish() {
+                dialog.dismiss();
+            }
+
+        }.start();
+
+        dialog.show();
+
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 }
