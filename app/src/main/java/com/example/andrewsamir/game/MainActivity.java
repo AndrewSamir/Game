@@ -29,9 +29,14 @@ public class MainActivity extends Activity {
         SharedPreferences sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
 
+        if(sp.getInt("your_int_key",0)>60000)
+            ;
+        else {
+
             editor.putInt("your_int_key", 60000);
 
             editor.commit();
+        }
 
 
 
@@ -135,6 +140,8 @@ public class MainActivity extends Activity {
         bo=false;
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.question);
+
+
 
         final Button button= (Button) findViewById(ID);
         final Button nextbutton= (Button) findViewById(nextID);
