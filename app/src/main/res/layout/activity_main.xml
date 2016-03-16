@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:orientation="vertical"
+    android:background="@drawable/static_qr_code_without_logo"
+
     android:layout_height="fill_parent"
     android:weightSum="3"
     tools:context=".MainActivity">
@@ -19,8 +21,8 @@
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:background="#000"
-            android:text="1"
-            android:id="@+id/B1"
+            android:text="5"
+            android:id="@+id/B5"
             android:textSize="@dimen/size"
             android:textColor="#ffffff"
 
@@ -38,9 +40,9 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_weight="1"
-            android:text="3"
+            android:text="6"
             android:textSize="@dimen/size"
-            android:id="@+id/B3"
+            android:id="@+id/B6"
 
             android:textColor="#ffffff"
 
@@ -60,9 +62,9 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_weight="1"
-            android:text="4"
+            android:text="1"
             android:textSize="@dimen/size"
-            android:id="@+id/B4"
+            android:id="@+id/B1"
             android:textColor="#ffffff"
 
             android:background="#000"
@@ -71,9 +73,9 @@
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:background="#000"
-            android:text="5"
+            android:text="9"
             android:textSize="@dimen/size"
-            android:id="@+id/B5"
+            android:id="@+id/B9"
             android:textColor="#ffffff"
 
             android:layout_height="fill_parent" />
@@ -81,9 +83,9 @@
             android:layout_width="wrap_content"
             android:layout_weight="1"
             android:background="#000"
-            android:text="6"
+            android:text="3"
             android:textSize="@dimen/size"
-            android:id="@+id/B6"
+            android:id="@+id/B3"
             android:textColor="#ffffff"
 
             android:layout_height="fill_parent" />
@@ -114,19 +116,19 @@
             android:layout_weight="1"
             android:background="#000"
             android:textColor="#ffffff"
-            android:text="8"
+            android:text="4"
             android:textSize="@dimen/size"
-            android:id="@+id/B8"
+            android:id="@+id/B4"
 
             android:layout_height="fill_parent" />
         <Button
             android:layout_width="wrap_content"
             android:layout_weight="1"
-            android:text="9"
+            android:text="8"
             android:textSize="@dimen/size"
-            android:id="@+id/B9"
+            android:id="@+id/B8"
             android:textColor="#ffffff"
-android:background="#000"
+            android:background="#000"
             android:layout_height="fill_parent" />
     </LinearLayout>
 

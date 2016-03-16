@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity {
 
@@ -17,6 +18,7 @@ public class MainActivity extends Activity {
 
     boolean bo=false;
     long myIntValue;
+    boolean back=true;
 
 
     @Override
@@ -63,7 +65,7 @@ public class MainActivity extends Activity {
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               startup("A group of students volunteered to finish a construction work in 25 days. 1Q of thestudents did not come and the work could be finished in 35 days. The original number of students in the group were",
+               startup("A group of students volunteered to finish a construction work in 25 days. 1 of the students did not come and the work could be finished in 35 days. The original number of students in the group were",
                         "25", "32", "35", "37", "35",R.id.B1,R.id.B2);
 
             }
@@ -122,7 +124,7 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
                 startup("Which is the greatest number?",
-                        "1/4 of 236"," 1/16 of 1028","1/9 of 504 "," 1/3 of 741"," 1/3 of 741",R.id.B9,0);
+                        "1/4 of 236"," 1/16 of 1028","1/9 of 504 "," 1/3 of 741"," 1/3 of 741",R.id.B9,R.id.B1);
             }
         });
 
@@ -136,7 +138,10 @@ public class MainActivity extends Activity {
 
         final Button button= (Button) findViewById(ID);
         final Button nextbutton= (Button) findViewById(nextID);
+        TextView t=(TextView)dialog.findViewById(R.id.msg);
+        SharedPreferences sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
 
+        t.setText("If You Choose a Wrong Answer The Application will Pause for "+sp.getInt("your_int_key", 60000)/1000+" Seconds");
         TextView text = (TextView) dialog.findViewById(R.id.textViewQuestion);
         text.setText(Q);
 
@@ -167,28 +172,34 @@ public class MainActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                int selcted = radioGroup.getCheckedRadioButtonId();
+                try {
+                    int selcted = radioGroup.getCheckedRadioButtonId();
 
-                RadioButton radioButton = (RadioButton) dialog.findViewById(selcted);
+                    RadioButton radioButton = (RadioButton) dialog.findViewById(selcted);
 
-                if (radioButton.getText().equals(Answer)) {
-                    bo = true;
-                    button.setVisibility(View.INVISIBLE);
-                    if(!nextbutton.equals(0))
-                    nextbutton.setEnabled(true);
-                    dialog.dismiss();
-                }
-                else {
-                    SharedPreferences sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
+                    if (radioButton.getText().equals(Answer)) {
+                        bo = true;
+                        button.setVisibility(View.INVISIBLE);
+                        if(!nextbutton.equals(0))
+                        nextbutton.setEnabled(true);
+                        dialog.dismiss();
+                    }
+                    else {
+                        SharedPreferences sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
 
-                     myIntValue = sp.getInt("your_int_key", 60000);
-                    SharedPreferences.Editor editor = sp.edit();
+                         myIntValue = sp.getInt("your_int_key", 60000);
+                        SharedPreferences.Editor editor = sp.edit();
 
-                    editor.putInt("your_int_key", sp.getInt("your_int_key", 60000)+60000);
+                        editor.putInt("your_int_key", sp.getInt("your_int_key", 60000)+60000);
 
-                    editor.commit();
+                        editor.commit();
+                        dialog.dismiss();
 
-                    Timer();
+                        Timer();
+                    }
+                } catch (Exception e) {
+                    Toast.makeText(MainActivity.this,"you should choose an answer before press DONE ..",Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
                 }
 
 
@@ -199,12 +210,18 @@ public class MainActivity extends Activity {
 
     }
 
+
     public void Timer(){
+
+        back=false;
         final Dialog dialog = new Dialog(this);
         dialog.setContentView(R.layout.timer);
+        dialog.setCanceledOnTouchOutside(false);
+        dialog.setCancelable(false);
         final TextView text = (TextView) dialog.findViewById(R.id.textViewTimer);
 
         new CountDownTimer( myIntValue,1000) {
+
 
             public void onTick(long millisUntilFinished) {
                 text.setText(millisUntilFinished / 1000+"");
@@ -212,6 +229,7 @@ public class MainActivity extends Activity {
             }
 
             public void onFinish() {
+                back=true;
                 dialog.dismiss();
             }
 
@@ -221,8 +239,4 @@ public class MainActivity extends Activity {
 
     }
 
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
     }
-}
