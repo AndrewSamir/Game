@@ -3,8 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:orientation="vertical"
-    android:background="@drawable/static_qr_code_without_logo"
-
+    android:background="@drawable/qrcode"
     android:layout_height="fill_parent"
     android:weightSum="3"
     tools:context=".MainActivity">

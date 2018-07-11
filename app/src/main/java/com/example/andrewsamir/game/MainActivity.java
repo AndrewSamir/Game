@@ -194,10 +194,10 @@ public class MainActivity extends Activity {
                     else {
                         SharedPreferences sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
 
-                         myIntValue = sp.getInt("your_int_key", 60000);
+                         myIntValue = sp.getInt("your_int_key", 30000);
                         SharedPreferences.Editor editor = sp.edit();
 
-                        editor.putInt("your_int_key", sp.getInt("your_int_key", 60000)+60000);
+                        editor.putInt("your_int_key", sp.getInt("your_int_key", 30000)+30000);
 
                         editor.commit();
                         dialog.dismiss();
