@@ -29,11 +29,11 @@ public class MainActivity extends Activity {
         SharedPreferences sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
 
-        if(sp.getInt("your_int_key",0)>60000)
+        if(sp.getInt("your_int_key",0)>30000)
             ;
         else {
 
-            editor.putInt("your_int_key", 60000);
+            editor.putInt("your_int_key", 30000);
 
             editor.commit();
         }
@@ -148,7 +148,7 @@ public class MainActivity extends Activity {
         TextView t=(TextView)dialog.findViewById(R.id.msg);
         SharedPreferences sp = getSharedPreferences("your_prefs", Activity.MODE_PRIVATE);
 
-        t.setText("If You Choose a Wrong Answer The Application will Pause for "+sp.getInt("your_int_key", 60000)/1000+" Seconds");
+        t.setText("If You Choose a Wrong Answer The Application will Pause for "+sp.getInt("your_int_key", 30000)/1000+" Seconds");
         TextView text = (TextView) dialog.findViewById(R.id.textViewQuestion);
         text.setText(Q);
 

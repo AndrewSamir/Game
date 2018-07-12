@@ -29,9 +29,10 @@ public class PasswordActivity extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                if (edtPassword.getText().toString().equals("fotokor"))
+                if (edtPassword.getText().toString().equals("footkor"))
                 {
                     startActivity(new Intent(PasswordActivity.this, MainActivity.class));
+                    finish();
                 } else
                 {
                     edtPassword.setError("Wrong Password");
